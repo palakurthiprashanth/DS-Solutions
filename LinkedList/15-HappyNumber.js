@@ -12,3 +12,29 @@ Solution:
 The process, defined above, to find out if a number is a happy number or not, always ends in a cycle. If the number is a happy number, the process will be stuck in a cycle on number ‘1,’ and if the number is not a happy number then the process will be stuck in a cycle with a set of numbers. As we saw in Example-2 while determining if ‘12’ is a happy number or not, our process will get stuck in a cycle with the following numbers: 89 -> 145 -> 42 -> 20 -> 4 -> 16 -> 37 -> 58 -> 89
 
  */
+
+function happyNumber(num) {
+  let slow = num;
+  let fast = num;
+
+  while (true) {
+    slow = sumOfSquares(num);
+    fast = sumOfSquares(sumOfSquares(num));
+
+    if (slow === fast) {
+      break;
+    }
+  }
+  return slow === 1;
+}
+
+function sumOfSquares(num) {
+  let sum = 0;
+
+  while (num > 0) {
+    let digit = num % 10;
+    sum += digit * digit;
+    num = Math.floor(num / 10);
+  }
+  return sum;
+}
